@@ -7,6 +7,28 @@ Diseño original: Stitch → *"Warm Culinary Intelligence"* (6 pantallas replica
 
 ---
 
+## 📸 Capturas de pantalla
+
+### 🪑 Mesas & Zonas — Salón y Terraza
+![Mesas y Zonas](docs/screenshots/mesas.png)
+
+### 🍳 Gestión de Pedidos (KDS Kanban)
+![Gestión de Pedidos](docs/screenshots/pedidos.png)
+
+### 📋 Menú & Toma de Pedidos
+![Menú y Toma de Pedidos](docs/screenshots/menu.png)
+
+### 📅 Reservas & Libro de Clientes (CRM)
+![Reservas y Clientes](docs/screenshots/reservas.png)
+
+### 🤖 Asistente IA — Agente Operativo SavorAI
+![Asistente IA](docs/screenshots/ia.png)
+
+### 📊 Analíticas & Facturación Gastronómica
+![Analíticas y Facturación](docs/screenshots/analiticas.png)
+
+---
+
 ## 📦 Estructura del proyecto
 
 ```
@@ -16,7 +38,7 @@ restaurante-IA/
 │   └── src/
 │       ├── index.ts          # Servidor Express (puerto 3001)
 │       ├── db/
-│       │   ├── schema.sql    # 42 tablas + ENUMs + índices
+│       │   ├── schema.sql    # 41 tablas + ENUMs + índices
 │       │   ├── init.ts       # Crea el esquema
 │       │   └── seed.ts       # Datos realistas de ejemplo
 │       └── routes/           # API REST (/api/...)
@@ -46,7 +68,7 @@ Levanta `savorai_db` (PostgreSQL 16) en **localhost:5433** con usuario/contrase�
 ```bash
 cd backend
 npm install
-npm run db:init      # crea las 42 tablas
+npm run db:init      # crea las 41 tablas
 npm run db:seed      # carga datos de ejemplo
 npm run dev          # http://localhost:3001
 ```
@@ -62,7 +84,7 @@ npm run dev          # http://localhost:5173
 ## 🗄️ Base de datos
 
 - **Motor:** PostgreSQL 16
-- **Esquema:** `backend/src/db/schema.sql` — 42 tablas, 20 ENUMs, índices de consulta
+- **Esquema:** `backend/src/db/schema.sql` — 41 tablas, 20 ENUMs, índices de consulta
 - **Módulos:** Base/organización · Menú · Inventario · Pedidos · Pagos · CRM/Reservas · IA · Soporte
 - **Specs del modelo:** [`docs/ESPECIFICACIONES.md`](docs/ESPECIFICACIONES.md)
 
