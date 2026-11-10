@@ -1,0 +1,799 @@
+/* ============================================================
+   Gestión de Pedidos / KDS — réplica Stitch "KDS & Comandas"
+   ============================================================ */
+
+.kds {
+  color: var(--on-surface);
+}
+
+/* ---------- cabecera ---------- */
+.kds-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.kds-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.kds-title h1 {
+  font-size: 30px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  max-width: 300px;
+}
+
+.kds-live::before {
+  animation: kds-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes kds-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+.kds-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kds-toggle {
+  display: inline-flex;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.kds-toggle button {
+  padding: 9px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.kds-toggle button + button {
+  border-left: 1px solid var(--border);
+}
+
+.kds-toggle button:hover {
+  background: var(--surface-container-low);
+}
+
+.kds-toggle button.active {
+  background: var(--tertiary);
+  color: #fff;
+}
+
+.kds-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-container-lowest);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  min-width: 250px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.kds-search:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.kds-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--on-surface);
+}
+
+/* ---------- alerta IA ---------- */
+.kds-alerta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--primary-soft);
+  border: 1px solid rgba(168, 50, 35, 0.28);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.kds-alerta .a-ico {
+  font-size: 20px;
+}
+
+.kds-alerta .a-body {
+  flex: 1;
+  min-width: 240px;
+}
+
+.kds-alerta .a-title {
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kds-alerta .a-badge {
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.kds-alerta .a-text {
+  font-size: 12.5px;
+  color: var(--on-surface-variant);
+  margin-top: 3px;
+  line-height: 17px;
+}
+
+.kds-alerta .a-btns {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+/* ---------- filtros + KPIs ---------- */
+.kds-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.kds-filters .filter-chip {
+  font-size: 12.5px;
+  padding: 6px 13px;
+}
+
+.kds-kpis {
+  margin-left: auto;
+  display: flex;
+  gap: 26px;
+}
+
+.kds-kpi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.kds-kpi .lbl {
+  font-size: 11.5px;
+  color: var(--on-surface-variant);
+}
+
+.kds-kpi .val {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- tablero kanban ---------- */
+.kds-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: var(--space-md);
+  align-items: start;
+}
+
+.kds-col {
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  min-width: 0;
+}
+
+.kds-col.c-pendiente {
+  border-top-color: var(--primary);
+}
+
+.kds-col.c-en_cocina {
+  border-top-color: var(--warning);
+}
+
+.kds-col.c-lista {
+  border-top-color: var(--success);
+}
+
+.kds-col.c-entregada {
+  border-top-color: var(--neutral);
+}
+
+.kds-col-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 4px 12px;
+}
+
+.kds-col-head .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.kds-col-head h3 {
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.kds-col-head .badge {
+  margin-left: auto;
+  font-size: 10.5px;
+  padding: 3px 9px;
+}
+
+.kds-col-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kds-empty {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--neutral);
+  padding: 26px 10px;
+  background: var(--surface-container-lowest);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* ---------- tarjeta-ticket ---------- */
+.kds-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: var(--shadow-1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kds-card.e-pendiente,
+.kds-card.e-en_cocina {
+  border-top-color: var(--primary);
+}
+
+.kds-card.e-lista,
+.kds-card.e-entregada {
+  border-top-color: var(--success);
+}
+
+.kds-chead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.kds-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.kds-num-sm {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.kds-chead .badge {
+  font-size: 10.5px;
+  padding: 3px 9px;
+}
+
+.kds-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kds-clock.t-ok {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.kds-clock.t-warn {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.kds-clock.t-bad {
+  background: var(--primary);
+  color: #fff;
+}
+
+.kds-check {
+  color: var(--success);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.kds-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  flex-wrap: wrap;
+}
+
+.kds-alerg {
+  background: var(--error-container);
+  color: var(--on-error-container);
+  border-radius: var(--radius-sm);
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+/* líneas del ticket */
+.kds-lineas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kds-linea {
+  display: flex;
+  gap: 8px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 9px;
+  align-items: flex-start;
+}
+
+.kds-cant {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.kds-linfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.kds-lname {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 17px;
+}
+
+.kds-lnotas {
+  display: block;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  font-style: italic;
+  margin-top: 2px;
+  line-height: 16px;
+}
+
+.kds-lestp {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  margin-top: 5px;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
+.kds-lestp.s-servida,
+.kds-lestp.s-lista {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.kds-lestp.s-en_preparacion {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.kds-lestp.s-pendiente {
+  background: var(--surface-container-high);
+  color: var(--on-surface-variant);
+}
+
+.kds-lestp.s-cancelada {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.kds-lestp.clickable {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.12s;
+}
+
+.kds-lestp.clickable:hover:not(:disabled) {
+  filter: brightness(0.94);
+  transform: translateY(-1px);
+}
+
+.kds-lestp.clickable:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.kds-lright {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.kds-estacion {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: var(--surface-container-high);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.kds-lico {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.kds-lico.i-servida,
+.kds-lico.i-lista {
+  color: var(--success);
+}
+
+.kds-lico.i-en_preparacion {
+  color: var(--warning);
+}
+
+.kds-lico.i-pendiente {
+  color: var(--neutral);
+}
+
+.kds-lico.i-cancelada {
+  color: var(--primary);
+}
+
+/* pie de la tarjeta */
+.kds-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kds-foot .kds-action {
+  flex: 1;
+  min-width: 0;
+}
+
+.kds-foot .btn:disabled,
+.kds-iconbtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.kds-iconbtn {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  background: var(--surface-container);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+}
+
+.kds-iconbtn:hover:not(:disabled) {
+  background: var(--surface-container-high);
+}
+
+.kds-entregado {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--success-soft);
+  border: 1px solid rgba(46, 125, 50, 0.28);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-size: 12.5px;
+  color: var(--success);
+  font-weight: 600;
+  line-height: 17px;
+}
+
+.kds-entregado .kds-total {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.kds-entregado .btn {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+/* ---------- lista cocina ---------- */
+.kds-lista-wrap {
+  margin-top: var(--space-md);
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  box-shadow: var(--shadow-1);
+}
+
+.kds-lista-wrap .data-table td {
+  vertical-align: middle;
+}
+
+.kds-lista-wrap .kds-foot {
+  flex-wrap: wrap;
+}
+
+.kds-lista-wrap .kds-iconbtn {
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+}
+
+.kds-lista-wrap .kds-action {
+  white-space: nowrap;
+}
+
+/* ---------- pie / leyenda ---------- */
+.kds-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: var(--space-lg);
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--on-surface-variant);
+}
+
+.kds-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.kds-legend .ld {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  margin-right: 7px;
+}
+
+.kds-conn {
+  font-weight: 600;
+}
+
+/* ---------- toast ---------- */
+.kds-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: var(--tertiary);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-3);
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 90;
+  max-width: 380px;
+}
+
+/* ---------- modal nuevo pedido ---------- */
+.kds-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 35, 42, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 80;
+  padding: 24px;
+}
+
+.kds-modal {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-lg);
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px;
+  box-shadow: var(--shadow-3);
+}
+
+.kds-modal h2 {
+  font-size: 20px;
+}
+
+.kds-closebtn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius);
+  background: var(--surface-container);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+}
+
+.kds-closebtn:hover {
+  background: var(--surface-container-high);
+}
+
+.kds-merror {
+  margin-top: 10px;
+  background: var(--error-container);
+  color: var(--on-error-container);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.kds-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.kds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.kds-field label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--neutral);
+}
+
+.kds-field input,
+.kds-field select {
+  padding: 9px 11px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  font-size: 13px;
+}
+
+.kds-field input:focus,
+.kds-field select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.kds-mlines {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kds-mlines li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
+  font-size: 13px;
+}
+
+.kds-mlines li button {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kds-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1320px) {
+  .kds-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .kds-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .kds-kpis {
+    margin-left: 0;
+  }
+
+  .kds-title h1 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .kds-form-row {
+    grid-template-columns: 1fr;
+  }
+}
